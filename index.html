@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Laboratório de Modelagem Matemática e Algoritmos (MODAL). Pesquisa operacional e otimização na Coordenação de Ciência da Computação da UFMA, em São Luís.">
+<style>
+  html{color-scheme:light}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+<title>Laboratório MODAL · UFMA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --surface:#FFFFFF;
+    --surface-2:#F7F7F6;
+    --ink:#121212;
+    --ink-soft:#484848;
+    --ink-faint:#7C7C7C;
+    --rule:#DEDEDC;
+    --rule-soft:#ECECEA;
+    --rule-strong:#121212;
+    --accent:#B0141E;
+    --accent-ink:#96111A;
+    --accent-wash:#FBF0F0;
+    --sans:"Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif:"Source Serif 4", ui-serif, Georgia, "Times New Roman", serif;
+    --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  :root{ color-scheme:light; }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16.5px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent-ink);text-underline-offset:3px;text-decoration-thickness:.6px}
+  a:hover{color:var(--ink)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:1px}
+  h1,h2,h3,h4{font-family:var(--serif);text-wrap:balance;margin:0;line-height:1.18}
+  p{margin:0}
+  ul,ol{margin:0;padding-left:1.15em}
+  code,kbd{font-family:var(--mono);font-size:.86em}
+  em{font-style:italic}
+
+  .wrap{max-width:1060px;margin:0 auto;padding-inline:22px}
+  .rail{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+
+  .topbar{
+    position:sticky;top:0;z-index:40;
+    background:var(--paper);
+    border-bottom:1px solid var(--rule);
+  }
+  .topbar-in{display:flex;align-items:center;gap:18px;padding-block:10px}
+  .brand{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--ink);white-space:nowrap;
+  }
+  .brand b{color:var(--accent);font-weight:500}
+  .navlinks{display:flex;gap:1px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+  .navlinks::-webkit-scrollbar{display:none}
+  .navlinks a{
+    font-size:13px;font-weight:500;color:var(--ink-soft);text-decoration:none;
+    padding:4px 9px;white-space:nowrap;border-bottom:2px solid transparent;
+  }
+  .navlinks a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  .navlinks a.ext{color:var(--accent)}
+  .prog{display:flex;align-items:center;gap:8px;white-space:nowrap}
+  .prog-track{width:64px;height:3px;background:var(--rule);overflow:hidden}
+  .prog-fill{height:100%;width:0%;background:var(--accent);transition:width .12s ease}
+  .prog-num{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+
+  .hero{border-bottom:3px double var(--rule-strong)}
+  .hero-in{
+    display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+    gap:52px;align-items:start;padding-block:60px 50px;
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);padding-bottom:12px;margin-bottom:20px;
+    border-bottom:1px solid var(--rule);
+  }
+  h1{font-size:clamp(34px,5.2vw,52px);font-weight:700;letter-spacing:-.018em}
+  h1 em{font-weight:400;color:var(--accent)}
+  .lede{margin-top:20px;font-family:var(--serif);font-size:19px;line-height:1.55;color:var(--ink-soft);max-width:52ch}
+  .facts{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:0;margin-top:32px;border-top:1px solid var(--rule);
+  }
+  .fact{
+    padding:11px 0;border-bottom:1px solid var(--rule);
+    font-size:13.5px;color:var(--ink-faint);
+  }
+  .fact:nth-child(even){padding-left:18px;border-left:1px solid var(--rule)}
+  .fact b{
+    display:block;font-family:var(--serif);font-size:20px;font-weight:600;
+    color:var(--ink);line-height:1.15;margin-bottom:1px;
+  }
+
+  .hero-mark{
+    display:flex;flex-direction:column;align-items:center;gap:18px;
+    padding:28px 24px 22px;border:1px solid var(--rule);background:var(--surface);
+  }
+  .hero-mark img.logo{width:min(220px,70%);height:auto;display:block}
+  .hero-mark .inst{
+    display:flex;align-items:center;justify-content:center;gap:22px;
+    width:100%;padding-top:16px;border-top:1px solid var(--rule);
+  }
+  .hero-mark .inst img{height:52px;width:auto;max-width:42%;object-fit:contain}
+  figure.plot{margin:0}
+  figure.plot svg{display:block;width:100%;height:auto;max-width:100%;border:1px solid var(--rule);background:var(--surface)}
+  figure.plot figcaption,
+  figure.hero-fig{margin:0}
+  figure.hero-fig figcaption,
+  figure.plot figcaption,
+  figure.inlinefig figcaption{
+    margin-top:12px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);
+    font-family:var(--serif);
+  }
+  figure.hero-fig figcaption b,
+  figure.plot figcaption b,
+  figure.inlinefig figcaption b{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);font-weight:500;
+  }
+
+  .ax{stroke:var(--ink);stroke-width:1}
+  .cons{stroke:var(--ink-faint);stroke-width:1;fill:none}
+  .region{fill:var(--accent);fill-opacity:.10;stroke:var(--accent);stroke-width:1.3}
+  .iso{stroke:var(--ink);stroke-width:1;stroke-dasharray:4 3.5;fill:none}
+  .vtx{fill:var(--surface);stroke:var(--accent);stroke-width:1.3}
+  .opt{fill:var(--accent);stroke:var(--surface);stroke-width:1.6}
+  .tick{fill:var(--ink-faint);font-family:var(--mono);font-size:8px}
+  .glab{fill:var(--ink);font-family:var(--serif);font-size:9.5px;font-style:italic}
+  .glab-a{fill:var(--ink-faint);font-family:var(--mono);font-size:8px}
+  .glab-s{fill:var(--accent);font-family:var(--mono);font-size:8.5px;font-weight:500}
+  .edge{stroke:var(--rule);stroke-width:1.2;fill:none}
+  .edge-hot{stroke:var(--accent);stroke-width:1.8;fill:none}
+  .node{fill:var(--surface);stroke:var(--ink);stroke-width:1.2}
+  .node-c{fill:var(--accent);stroke:var(--accent)}
+  .nl{fill:var(--ink);font-family:var(--mono);font-size:8px}
+  .nl-c{fill:#fff;font-family:var(--mono);font-size:8px;font-weight:500}
+  .tail{fill:var(--accent);fill-opacity:.28}
+  .dist{fill:none;stroke:var(--ink);stroke-width:1.4}
+  .box{fill:var(--surface-2);stroke:var(--rule);stroke-width:1}
+  .box-h{fill:var(--accent-wash);stroke:var(--accent);stroke-width:1.2}
+
+  figure.inlinefig{margin:18px 0 0}
+  figure.inlinefig svg{display:block;width:100%;height:auto;max-width:100%;border:1px solid var(--rule);background:var(--surface)}
+  figure.inlinefig figcaption{margin-top:9px;font-size:13px}
+
+  section{padding-block:58px;border-bottom:1px solid var(--rule)}
+  .sec-head{margin-bottom:34px;max-width:62ch}
+  .sec-kicker{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:10px;
+  }
+  h2{font-size:clamp(25px,3.6vw,34px);font-weight:600;letter-spacing:-.012em}
+  .sec-head p{margin-top:12px;color:var(--ink-soft);font-family:var(--serif);font-size:17.5px;line-height:1.55}
+
+  .setup{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:44px;align-items:start}
+  .steps{display:flex;flex-direction:column}
+  .step{display:flex;gap:16px;align-items:flex-start;padding-block:15px;border-top:1px solid var(--rule)}
+  .step:last-child{border-bottom:1px solid var(--rule)}
+  .step-n{
+    flex:0 0 auto;font-family:var(--serif);font-size:19px;font-weight:600;
+    color:var(--accent);line-height:1.25;width:18px;
+  }
+  .step h4{font-family:var(--sans);font-size:15.5px;font-weight:600}
+  .step p{font-size:15px;color:var(--ink-soft);margin-top:3px}
+
+  .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 48px;align-items:start}
+  .split > div{padding-block:4px}
+
+  .terms{display:flex;flex-wrap:wrap;gap:5px}
+  .term{
+    font-size:12.5px;border:1px solid var(--rule);
+    padding:2px 8px;color:var(--ink-soft);background:var(--surface);
+  }
+  .note{font-size:14.5px;color:var(--ink-soft);margin-top:18px;line-height:1.55;
+    font-family:var(--serif);border-left:2px solid var(--rule);padding-left:14px}
+  .note b{color:var(--ink);font-weight:600}
+
+  .weeks{display:flex;flex-direction:column;gap:0}
+  .week{border-top:2px solid var(--rule-strong);padding-top:22px;padding-bottom:38px}
+  .week + .week{margin-top:8px}
+  .week-top{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
+  .week-n{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .week-top h3{font-size:24px;font-weight:600;flex:1 1 280px;min-width:0;letter-spacing:-.01em}
+  .week-hours{font-family:var(--mono);font-size:11px;color:var(--ink-faint);white-space:nowrap}
+  .week-goal{
+    font-family:var(--serif);font-size:17px;line-height:1.5;color:var(--ink-soft);
+    max-width:70ch;padding-bottom:22px;border-bottom:1px solid var(--rule);
+  }
+  .week-goal b{color:var(--ink);font-weight:600;font-family:var(--sans);font-size:14px;
+    text-transform:uppercase;letter-spacing:.08em;margin-right:6px}
+  .week-body{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0}
+  .col{padding:22px 0}
+  .col + .col{border-left:1px solid var(--rule);padding-left:34px}
+  .col:first-child{padding-right:34px}
+  .col-title{
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:14px;
+  }
+
+  .res{list-style:none;padding:0;display:flex;flex-direction:column;gap:0}
+  .res li{display:flex;gap:14px;align-items:baseline;padding-block:11px;border-top:1px solid var(--rule-soft)}
+  .res li:first-child{border-top:none;padding-top:0}
+  .kind{
+    flex:0 0 auto;width:84px;padding-right:12px;
+    font-family:var(--mono);font-size:9px;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--ink-faint);
+    overflow-wrap:anywhere;
+  }
+  .kind.v{color:var(--accent)}
+  .res a{font-weight:500;font-size:15px}
+  .res span{display:block;font-size:13.5px;color:var(--ink-faint);line-height:1.45;margin-top:1px}
+
+  .deliver{
+    margin-top:26px;padding:16px 20px;background:var(--accent-wash);
+    border-top:2px solid var(--accent);
+    font-family:var(--serif);font-size:16px;line-height:1.5;color:var(--ink);max-width:78ch;
+  }
+  .deliver b{
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);display:block;margin-bottom:5px;font-weight:500;
+  }
+
+  .shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:38px}
+  .shelfcard{border-top:2px solid var(--rule-strong);padding-top:16px}
+  .shelfcard h4{font-size:18px;font-weight:600;margin-bottom:3px}
+  .shelfcard > p{font-size:13.5px;color:var(--ink-faint);margin-bottom:16px}
+
+  .coord{
+    display:grid;grid-template-columns:minmax(0,.42fr) minmax(0,1.58fr);
+    gap:0;border-top:2px solid var(--rule-strong);
+  }
+  .coord-id{padding:22px 28px 22px 0;border-right:1px solid var(--rule)}
+  .coord-id .who{
+    font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:-.01em;margin-top:8px;
+  }
+  .coord-id .role{font-size:14px;color:var(--ink-faint);margin-top:6px}
+  .coord-bio{padding:22px 0 22px 34px}
+  .coord-bio ul{padding-left:0;list-style:none}
+  .coord-bio li{
+    padding-block:8px;border-top:1px solid var(--rule-soft);
+    font-size:15px;color:var(--ink-soft);
+  }
+  .coord-bio li:first-child{border-top:none;padding-top:0}
+  .coord-bio b{color:var(--ink);font-weight:600}
+
+  .people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+  .people h4{font-size:18px;font-weight:600;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+
+  .traps{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:0 38px}
+  .trap{padding-block:18px;border-top:1px solid var(--rule)}
+  .trap h4{font-family:var(--sans);font-size:15px;font-weight:600;margin-bottom:5px}
+  .trap h4 i{font-style:normal;color:var(--accent);font-family:var(--mono);font-size:11px;margin-right:7px}
+  .trap p{font-size:14.5px;color:var(--ink-soft)}
+
+  .partners{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:0;border-top:2px solid var(--rule-strong);
+  }
+  .partner{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    min-height:148px;padding:22px 18px;
+    border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);
+    text-align:center;
+  }
+  .partners .partner:nth-child(3n){border-right:none}
+  .partner img{max-height:64px;max-width:78%;width:auto;object-fit:contain}
+  .partner.dark{background:#121212}
+  .partner.dark img{max-height:52px;filter:none}
+  .partner span{
+    display:block;margin-top:10px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .partner.dark span{color:#bdbdbd}
+
+  .after{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:0 38px}
+  .after > div{padding-block:18px;border-top:1px solid var(--rule)}
+  .after > div.next{
+    grid-column:1 / -1;border-top:2px solid var(--accent);
+    background:var(--accent-wash);padding:20px 22px;
+  }
+  .after > div.next h4{color:var(--accent)}
+  .after > div.next p{max-width:78ch}
+  .after h4{font-size:17px;font-weight:600;margin-bottom:6px}
+  .after p{font-size:14.5px;color:var(--ink-soft)}
+
+  footer{padding-block:38px 52px;color:var(--ink-faint);font-size:14px}
+  footer p + p{margin-top:5px}
+  footer .biblio{
+    font-size:14px;line-height:1.65;margin-top:20px;max-width:74ch;
+    font-family:var(--serif);color:var(--ink-soft);
+    border-top:1px solid var(--rule);padding-top:16px;
+  }
+  footer .biblio b{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px;font-weight:500}
+
+  @media (max-width:860px){
+    .hero-in{grid-template-columns:1fr;gap:34px;padding-block:42px 36px}
+    .setup,.split,.coord,.people,.week-body{grid-template-columns:1fr}
+    .col:first-child{padding-right:0}
+    .col + .col{border-left:none;border-top:1px solid var(--rule);padding-left:0}
+    .coord-id{border-right:none;border-bottom:1px solid var(--rule);padding:22px 0}
+    .coord-bio{padding:22px 0}
+    .brand{display:none}
+    .navlinks{margin-left:0}
+    .partners{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .partners .partner:nth-child(3n){border-right:1px solid var(--rule)}
+    .partners .partner:nth-child(2n){border-right:none}
+  }
+  @media (max-width:480px){
+    .facts{grid-template-columns:1fr}
+    .fact:nth-child(even){padding-left:0;border-left:none}
+    .partners{grid-template-columns:1fr}
+    .partners .partner{border-right:none}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <div class="brand">MODAL · UFMA · <b>Laboratório</b></div>
+    <nav class="navlinks">
+      <a href="#sobre">Sobre</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#linhas">Linhas</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#parcerias">Parcerias</a>
+      <a href="#formacao">Formação</a>
+      <a class="ext" href="https://glaubosclimaco.github.io/onboarding-po/" target="_blank" rel="noopener">Trilha PO</a>
+    </nav>
+    <div class="prog" title="Posição na página">
+      <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+      <span class="prog-num" id="progNum">0%</span>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <div class="eyebrow">Laboratório · COCOM/UFMA · São Luís</div>
+      <h1>Modelagem matemática e <em>algoritmos</em> para problemas reais</h1>
+      <p class="lede">O MODAL desenvolve pesquisa científica e tecnológica em Pesquisa Operacional e Otimização, com soluções computacionais para decisões de alta complexidade.</p>
+      <div class="facts">
+        <div class="fact"><b>COCOM/UFMA</b>Ciência da Computação</div>
+        <div class="fact"><b>Campus do Bacanga</b>São Luís, Maranhão</div>
+        <div class="fact"><b>Básica e aplicada</b>pesquisa e parcerias</div>
+        <div class="fact"><b>Graduação e pós</b>formação de pesquisadores</div>
+      </div>
+    </div>
+
+    <figure class="hero-fig">
+      <div class="hero-mark">
+        <img class="logo" src="img/modal_logo.png" alt="Logotipo do laboratório MODAL, um grafo com um núcleo e raios.">
+        <div class="inst">
+          <img src="img/ufma-logo.png" alt="Brasão da Universidade Federal do Maranhão.">
+          <img src="img/nca.jpeg" alt="Logotipo do Núcleo de Computação Aplicada.">
+        </div>
+      </div>
+      <figcaption><b>Figura 1.</b> Laboratório de Modelagem Matemática e Algoritmos, na Coordenação de Ciência da Computação da UFMA. O desenho do logotipo é o recado do grupo: nós, arestas e um núcleo de decisão.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <section id="sobre">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Missão</div>
+        <h2>O que o laboratório faz</h2>
+        <p>Modelamos problemas complexos em linguagem matemática e desenvolvemos algoritmos para resolvê-los. A âncora é a Pesquisa Operacional: decidir bem quando as opções são muitas, os recursos são finitos e o custo de errar é alto.</p>
+      </div>
+      <div class="setup">
+        <div class="steps">
+          <div class="step">
+            <div class="step-n">1</div>
+            <div>
+              <h4>Pesquisa básica e aplicada</h4>
+              <p>Formulamos modelos, provamos propriedades e medimos desempenho, sempre com um problema real à vista: porto, hospital, contrato de energia, frota, rota.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">2</div>
+            <div>
+              <h4>Indústria, governo e academia</h4>
+              <p>Os projetos nascem em parceria. Dados reais, restrições de operação e uma pergunta que alguém precisa responder na prática.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">3</div>
+            <div>
+              <h4>Formação de pessoas</h4>
+              <p>Iniciação científica, TCC, mestrado e colaboração em doutorado. Quem entra no laboratório aprende a modelar, a implementar e a escrever.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">4</div>
+            <div>
+              <h4>Campus do Bacanga</h4>
+              <p>Coordenação de Ciência da Computação (COCOM), Universidade Federal do Maranhão, São Luís.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="col-title">Ferramentas e métodos</div>
+          <div class="terms">
+            <span class="term">algoritmos em grafos</span>
+            <span class="term">programação linear</span>
+            <span class="term">programação inteira</span>
+            <span class="term">heurísticas</span>
+            <span class="term">metaheurísticas</span>
+            <span class="term">algoritmos genéticos</span>
+            <span class="term">colônia de formigas</span>
+            <span class="term">otimização estocástica</span>
+            <span class="term">otimização robusta</span>
+            <span class="term">simulação</span>
+            <span class="term">mineração de dados</span>
+          </div>
+          <p class="note">O solver, a heurística e o simulador são meios. O trabalho do laboratório começa antes: traduzir o problema em conjuntos, parâmetros, variáveis e restrições que alguém consiga defender.</p>
+          <div class="col-title" style="margin-top:28px">Domínios de aplicação</div>
+          <div class="terms">
+            <span class="term">logística e transportes</span>
+            <span class="term">saúde computacional</span>
+            <span class="term">mercados de energia</span>
+            <span class="term">manufatura e portos</span>
+            <span class="term">agronegócio</span>
+            <span class="term">transporte público urbano</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipe">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Quem pesquisa</div>
+        <h2>Coordenação, orientandos e colaboradores</h2>
+        <p>O grupo é pequeno de propósito. A reunião de orientação é o centro do trabalho: modelo no papel, código no ar, texto no caderno de bordo.</p>
+      </div>
+
+      <div class="coord">
+        <div class="coord-id">
+          <div class="sec-kicker" style="margin-bottom:0">Coordenação</div>
+          <p class="who">Prof. Dr. Francisco Glaubos Nunes Clímaco</p>
+          <p class="role">Professor adjunto, COCOM/UFMA, desde 2017</p>
+        </div>
+        <div class="coord-bio">
+          <ul>
+            <li><b>Doutorado</b> Engenharia de Sistemas e Computação, UFRJ (2020)</li>
+            <li><b>Mestrado</b> Computação, UFF (2015)</li>
+            <li><b>Graduação</b> Ciência da Computação, UFT (2013)</li>
+            <li><b>Pós-doutorado</b> UFRJ (2021 a 2025)</li>
+            <li><b>Revisor</b> Scientific Reports, RAIRO-OR, Cluster Computing</li>
+            <li><b>Lattes</b> <a href="http://lattes.cnpq.br/1711180190759554" target="_blank" rel="noopener">1711180190759554</a>
+              · <b>ORCID</b> <a href="https://orcid.org/0000-0002-1357-1318" target="_blank" rel="noopener">0000-0002-1357-1318</a></li>
+            <li><b>E-mail</b> <a href="mailto:francisco.glaubos@ufma.br">francisco.glaubos@ufma.br</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="people" style="margin-top:42px">
+        <div>
+          <h4>Orientandos ativos (UFMA)</h4>
+          <ul class="res">
+            <li><span class="kind v">Mestrado</span><div>Carlos Eduardo Veras Gomes</div></li>
+            <li><span class="kind v">Mestrado</span><div>João Augusto de Carvalho</div></li>
+            <li><span class="kind v">Mestrado</span><div>Ronald da Silva</div></li>
+            <li><span class="kind v">Mestrado</span><div>Victor Martinez</div></li>
+            <li><span class="kind">IC</span><div>Eduardo Henrique</div></li>
+            <li><span class="kind">IC</span><div>João Lobato</div></li>
+            <li><span class="kind">IC</span><div>Marcelo Heluy</div></li>
+            <li><span class="kind">TCC</span><div>Ellen Serra</div></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Colaboradores externos</h4>
+          <ul class="res">
+            <li><span class="kind v">UFRJ</span><div>Profa. Dra. Laura Bahiense</div></li>
+            <li><span class="kind v">UFRJ</span><div>Prof. Dr. Glaydston M. Ribeiro</div></li>
+            <li><span class="kind v">UFRJ</span><div>Prof. Dr. Luidi Simonetti</div></li>
+            <li><span class="kind">CEPEL</span><div>Dra. Ana Lucia Saboia</div></li>
+            <li><span class="kind">HEC</span><div>Prof. Dr. G. Laporte, HEC Montréal</div></li>
+          </ul>
+          <p class="note">A rede de colaboração é o que permite atacar problemas que não cabem em um laboratório só: energia com o CEPEL, logística com a COPPE, saúde com o hospital universitário.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="linhas">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Pesquisa</div>
+        <h2>Cinco linhas, um mesmo ofício</h2>
+        <p>Cada linha muda o recorte do problema. O ofício é o mesmo: modelar, resolver, medir e devolver uma decisão que se defenda.</p>
+      </div>
+
+      <div class="weeks">
+
+        <article class="week" id="l1">
+          <div class="week-top">
+            <span class="week-n">Linha 1</span>
+            <h3>Otimização combinatória</h3>
+          </div>
+          <p class="week-goal"><b>Objetivo</b> organizar escolhas entre muitas possibilidades e encontrar a melhor solução em problemas de rota, distribuição e localização.</p>
+          <div class="week-body">
+            <div class="col">
+              <div class="col-title">Na prática</div>
+              <ul class="res">
+                <li><span class="kind v">Rotas</span><div>encontrar trajetos mais curtos e eficientes</div></li>
+                <li><span class="kind">Recursos</span><div>definir o melhor uso de frota, tempo e capacidade</div></li>
+                <li><span class="kind">Combinações</span><div>escolher arranjos com maior benefício e menor custo</div></li>
+              </ul>
+              <p class="note">Reduzir custo, cumprir prazo e melhorar o serviço costumam ser três faces da mesma decisão discreta.</p>
+            </div>
+            <div class="col">
+              <div class="col-title">Exemplo</div>
+              <figure class="inlinefig">
+                <svg viewBox="0 0 300 168" role="img" aria-label="Grafo com seis vértices. O caminho mínimo de a até f passa por c, b, d e e, com custo 15.">
+                  <line class="edge" x1="36" y1="78" x2="92" y2="28"></line>
+                  <line class="edge" x1="92" y1="28" x2="168" y2="28"></line>
+                  <line class="edge" x1="168" y1="28" x2="258" y2="78"></line>
+                  <line class="edge" x1="92" y1="28" x2="110" y2="118"></line>
+                  <line class="edge" x1="110" y1="118" x2="168" y2="28"></line>
+                  <line class="edge" x1="110" y1="118" x2="198" y2="118"></line>
+                  <line class="edge-hot" x1="36" y1="78" x2="110" y2="118"></line>
+                  <line class="edge-hot" x1="110" y1="118" x2="92" y2="28"></line>
+                  <line class="edge-hot" x1="92" y1="28" x2="168" y2="28"></line>
+                  <line class="edge-hot" x1="168" y1="28" x2="198" y2="118"></line>
+                  <line class="edge-hot" x1="198" y1="118" x2="258" y2="78"></line>
+                  <circle class="opt" cx="36" cy="78" r="11"></circle>
+                  <circle class="vtx" cx="92" cy="28" r="11"></circle>
+                  <circle class="vtx" cx="110" cy="118" r="11"></circle>
+                  <circle class="vtx" cx="168" cy="28" r="11"></circle>
+                  <circle class="vtx" cx="198" cy="118" r="11"></circle>
+                  <circle class="opt" cx="258" cy="78" r="11"></circle>
+                  <text class="nl-c" x="36" y="81" text-anchor="middle">a</text>
+                  <text class="nl" x="92" y="32" text-anchor="middle">b</text>
+                  <text class="nl" x="110" y="122" text-anchor="middle">c</text>
+                  <text class="nl" x="168" y="32" text-anchor="middle">d</text>
+                  <text class="nl" x="198" y="122" text-anchor="middle">e</text>
+                  <text class="nl-c" x="258" y="81" text-anchor="middle">f</text>
+                  <text class="glab-a" x="62" y="108">2</text>
+                  <text class="glab-a" x="98" y="78">1</text>
+                  <text class="glab-a" x="128" y="22">5</text>
+                  <text class="glab-a" x="192" y="62">2</text>
+                  <text class="glab-a" x="236" y="108">5</text>
+                  <text class="glab-s" x="150" y="158" text-anchor="middle">caminho mínimo a → f · custo 15</text>
+                </svg>
+                <figcaption><b>Figura 2.</b> Caminho mínimo em uma rede: das muitas rotas entre a e f, uma delas soma 15. O resto da linha 1 é uma variação disso, com mais restrições.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </article>
+
+        <article class="week" id="l2">
+          <div class="week-top">
+            <span class="week-n">Linha 2</span>
+            <h3>Otimização estocástica e robusta</h3>
+          </div>
+          <p class="week-goal"><b>Objetivo</b> tomar decisão sob incerteza, equilibrando resultado esperado e segurança, em vez de fingir que o futuro cabe em um único número.</p>
+          <div class="week-body">
+            <div class="col">
+              <div class="col-title">Na prática</div>
+              <ul class="res">
+                <li><span class="kind v">Etapas</span><div>planejar agora, com o direito de reagir depois, à luz de cenários</div></li>
+                <li><span class="kind">Risco</span><div>olhar o retorno e a cauda ruim da distribuição, não só a média</div></li>
+                <li><span class="kind">Resiliência</span><div>segurar variação de demanda, preço ou geração sem quebrar o plano</div></li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="col-title">Exemplo</div>
+              <figure class="inlinefig">
+                <svg viewBox="0 0 300 168" role="img" aria-label="Curva de densidade com a cauda direita pintada, representando o CVaR dos piores cinco por cento dos cenários.">
+                  <line class="ax" x1="28" y1="132" x2="284" y2="132"></line>
+                  <line class="ax" x1="28" y1="132" x2="28" y2="18"></line>
+                  <path class="tail" d="M186,132 L186,78 C198,52 214,38 232,48 C248,56 262,78 278,118 L278,132 Z"></path>
+                  <path class="dist" d="M32,128 C48,126 62,118 78,92 C96,54 118,22 148,22 C172,22 186,48 186,78 C198,52 214,38 232,48 C248,56 262,78 278,118"></path>
+                  <line class="iso" x1="186" y1="18" x2="186" y2="132"></line>
+                  <text class="glab-a" x="100" y="148">95% dos cenários</text>
+                  <text class="glab-s" x="232" y="148">cauda 5%</text>
+                  <text class="glab" x="284" y="162" text-anchor="end">retorno</text>
+                  <text class="glab" x="34" y="16">prob.</text>
+                  <text class="glab-s" x="210" y="36">CVaR</text>
+                </svg>
+                <figcaption><b>Figura 3.</b> O CVaR olha a média da cauda ruim, não só o limite. Em contratos de energia, isso vira uma restrição de risco que o modelo respeita.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </article>
+
+        <article class="week" id="l3">
+          <div class="week-top">
+            <span class="week-n">Linha 3</span>
+            <h3>Mineração de dados híbrida</h3>
+          </div>
+          <p class="week-goal"><b>Objetivo</b> usar análise de dados junto com técnicas de otimização para estreitar o espaço de busca e melhorar a decisão.</p>
+          <div class="week-body">
+            <div class="col">
+              <div class="col-title">Na prática</div>
+              <ul class="res">
+                <li><span class="kind v">Padrões</span><div>extrair regularidades que guiem o modelo, em vez de enumerar o óbvio</div></li>
+                <li><span class="kind">Foco</span><div>concentrar a busca nas alternativas mais promissoras</div></li>
+                <li><span class="kind">Fluxo</span><div>ligar dados, mineração e heurística num único encadeamento</div></li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="col-title">Exemplo</div>
+              <figure class="inlinefig">
+                <svg viewBox="0 0 300 148" role="img" aria-label="Fluxo de três caixas à esquerda, Dados, Mineração e Heurística, apontando para uma caixa Solução à direita.">
+                  <rect class="box" x="22" y="16" width="118" height="28"></rect>
+                  <rect class="box" x="22" y="58" width="118" height="28"></rect>
+                  <rect class="box" x="22" y="100" width="118" height="28"></rect>
+                  <rect class="box-h" x="186" y="48" width="92" height="48"></rect>
+                  <text class="nl" x="81" y="34" text-anchor="middle">dados</text>
+                  <text class="nl" x="81" y="76" text-anchor="middle">mineração</text>
+                  <text class="nl" x="81" y="118" text-anchor="middle">heurística</text>
+                  <text class="glab-s" x="232" y="76" text-anchor="middle">solução</text>
+                  <line class="edge-hot" x1="140" y1="30" x2="140" y2="72"></line>
+                  <line class="edge-hot" x1="140" y1="72" x2="140" y2="114"></line>
+                  <line class="edge-hot" x1="140" y1="72" x2="186" y2="72"></line>
+                  <line class="edge-hot" x1="140" y1="114" x2="186" y2="86"></line>
+                </svg>
+                <figcaption><b>Figura 4.</b> Dados não substituem o modelo. Eles alimentam a heurística e cortam ramos ruins antes de o solver gastar tempo neles.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </article>
+
+        <article class="week" id="l4">
+          <div class="week-top">
+            <span class="week-n">Linha 4</span>
+            <h3>Logística e transportes</h3>
+          </div>
+          <p class="week-goal"><b>Objetivo</b> localizar facilidades, rotear veículos, definir frequência de ônibus, organizar operações portuárias e contar tráfego, equilibrando custo, serviço e equidade.</p>
+          <div class="week-body">
+            <div class="col">
+              <div class="col-title">Na prática</div>
+              <ul class="res">
+                <li><span class="kind v">Tático</span><div>onde abrir, com que capacidade, para que demanda</div></li>
+                <li><span class="kind">Operacional</span><div>quem vai aonde, em que ordem, com que janela de tempo</div></li>
+                <li><span class="kind">Contexto</span><div>cidade, estrada e porto, com restrições que só aparecem no chão</div></li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="col-title">Exemplo</div>
+              <figure class="inlinefig">
+                <svg viewBox="0 0 300 168" role="img" aria-label="Um hub no centro ligado a cinco pontos de demanda, com duas rotas destacadas saindo do hub.">
+                  <line class="edge" x1="150" y1="84" x2="48" y2="36"></line>
+                  <line class="edge" x1="150" y1="84" x2="86" y2="138"></line>
+                  <line class="edge" x1="150" y1="84" x2="250" y2="40"></line>
+                  <line class="edge-hot" x1="150" y1="84" x2="36" y2="92"></line>
+                  <line class="edge-hot" x1="150" y1="84" x2="246" y2="128"></line>
+                  <circle class="opt" cx="150" cy="84" r="14"></circle>
+                  <circle class="vtx" cx="48" cy="36" r="8"></circle>
+                  <circle class="vtx" cx="86" cy="138" r="8"></circle>
+                  <circle class="vtx" cx="250" cy="40" r="8"></circle>
+                  <circle class="vtx" cx="36" cy="92" r="8"></circle>
+                  <circle class="vtx" cx="246" cy="128" r="8"></circle>
+                  <text class="nl-c" x="150" y="88" text-anchor="middle">hub</text>
+                  <text class="glab-s" x="150" y="158" text-anchor="middle">localização de hub e conexões de rota</text>
+                </svg>
+                <figcaption><b>Figura 5.</b> Abrir um hub é uma decisão binária. Ligá-lo à demanda é roteamento. Os dois juntos são o tipo de modelo que o laboratório escreve para logística.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </article>
+
+        <article class="week" id="l5">
+          <div class="week-top">
+            <span class="week-n">Linha 5</span>
+            <h3>Otimização em saúde</h3>
+          </div>
+          <p class="week-goal"><b>Objetivo</b> apoiar a decisão na alocação de leitos, na distribuição de suprimentos e na organização de recursos hospitalares, inclusive nas filas do SUS.</p>
+          <div class="week-body">
+            <div class="col">
+              <div class="col-title">Na prática</div>
+              <ul class="res">
+                <li><span class="kind v">Prioridade</span><div>atender com restrições reais de equipe, leito e tempo</div></li>
+                <li><span class="kind">Fila</span><div>reduzir espera e ociosidade ao mesmo tempo</div></li>
+                <li><span class="kind">Dados</span><div>integrar o modelo ao que o hospital já registra no cotidiano</div></li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="col-title">Exemplo</div>
+              <figure class="inlinefig">
+                <svg viewBox="0 0 300 148" role="img" aria-label="Uma fila na base apontando para três leitos de UTI no topo.">
+                  <rect class="box-h" x="108" y="100" width="84" height="28"></rect>
+                  <text class="nl" x="150" y="118" text-anchor="middle">fila</text>
+                  <rect class="box" x="22" y="18" width="72" height="28"></rect>
+                  <rect class="box" x="114" y="18" width="72" height="28"></rect>
+                  <rect class="box" x="206" y="18" width="72" height="28"></rect>
+                  <text class="nl" x="58" y="36" text-anchor="middle">UTI 1</text>
+                  <text class="nl" x="150" y="36" text-anchor="middle">UTI 2</text>
+                  <text class="nl" x="242" y="36" text-anchor="middle">UTI 3</text>
+                  <line class="edge-hot" x1="150" y1="100" x2="58" y2="46"></line>
+                  <line class="edge-hot" x1="150" y1="100" x2="150" y2="46"></line>
+                  <line class="edge-hot" x1="150" y1="100" x2="242" y2="46"></line>
+                </svg>
+                <figcaption><b>Figura 6.</b> Três leitos, uma fila, e a pergunta de todo plantão: quem entra agora. O modelo não substitui o clínico; ele organiza a restrição que o clínico já conhece.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Em andamento e recentes</div>
+        <h2>Três projetos que mostram o recorte</h2>
+        <p>Energia, porto e transporte de longa distância. Em todos, o modelo precisa conviver com incerteza, operação real e uma restrição que não aparece no livro-texto.</p>
+      </div>
+
+      <article class="week" id="p1">
+        <div class="week-top">
+          <span class="week-n">Projeto 1</span>
+          <h3>Mercado de energia elétrica</h3>
+        </div>
+        <p class="week-goal"><b>Objetivo</b> ajudar comercializadores a decidir quanto e quando comprar ou vender energia, como numa carteira de investimentos: equilibrar retorno e risco ao longo do tempo.</p>
+        <div class="week-body">
+          <div class="col">
+            <div class="col-title">O problema</div>
+            <ul class="res">
+              <li><span class="kind v">Mercado</span><div>contratos livres no sistema brasileiro, com geração e preços que variam</div></li>
+              <li><span class="kind">Incerteza</span><div>dois mil cenários para avaliar contextos distintos de compra e venda</div></li>
+              <li><span class="kind">Saída</span><div>uma estratégia prática de contratação, não um número isolado</div></li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="col-title">O que o modelo apoia</div>
+            <ul class="res">
+              <li><span class="kind">Agora</span><div>vender já ou esperar um preço melhor</div></li>
+              <li><span class="kind">Depois</span><div>comprar para proteção futura</div></li>
+              <li><span class="kind">Risco</span><div>balancear ganho esperado e segurança da cauda</div></li>
+            </ul>
+            <div class="deliver"><b>Parceiros</b>
+              CEPEL (Centro de Pesquisas de Energia Elétrica), Dra. Laura Bahiense e Profa. Dra. Ana Lucia Saboia.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="week" id="p2">
+        <div class="week-top">
+          <span class="week-n">Projeto 2</span>
+          <h3>Porto do Itaqui</h3>
+        </div>
+        <p class="week-goal"><b>Objetivo</b> organizar o fluxo de caminhões no carregamento e no descarregamento de navios graneleiros, reduzindo fila, ociosidade e custo operacional.</p>
+        <div class="week-body">
+          <div class="col">
+            <div class="col-title">Contribuições</div>
+            <ul class="res">
+              <li><span class="kind v">Modelo</span><div>priorização matemática de veículos no pátio</div></li>
+              <li><span class="kind">Simulação</span><div>fluxo de caminhões em tempo real, com dados do porto</div></li>
+              <li><span class="kind">Caso</span><div>estudo com operação real do Porto do Itaqui, no Maranhão</div></li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="col-title">Resultados</div>
+            <ul class="res">
+              <li><span class="kind v">Prêmio</span><div>Best Paper Award, ICEIS 2025</div></li>
+              <li><span class="kind">Artigos</span><div>três em conferência (ICEIS 2025 e CIDESPORT) e dois em periódico</div></li>
+              <li><span class="kind">Formação</span><div>dois TCCs defendidos em 2025</div></li>
+              <li><span class="kind">Fomento</span><div>FAPEMA</div></li>
+            </ul>
+            <div class="deliver"><b>Parceiros</b>
+              Porto do Itaqui, FAPEMA e UFMA/COCOM.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="week" id="p3">
+        <div class="week-top">
+          <span class="week-n">Projeto 3 · em andamento</span>
+          <h3>Localização de carregadores com roteamento e jornada dos motoristas</h3>
+        </div>
+        <p class="week-goal"><b>Objetivo</b> localizar carregadores para caminhões elétricos de longa distância respeitando a jornada de trabalho dos motoristas, de modo que recarga, descanso e atraso deixem de ser três problemas separados.</p>
+        <div class="week-body">
+          <div class="col">
+            <div class="col-title">Contexto</div>
+            <ul class="res">
+              <li><span class="kind v">Bateria</span><div>maior necessidade de recarga em trechos longos</div></li>
+              <li><span class="kind">Jornada</span><div>motoristas vários dias na estrada, com legislação própria (JTM)</div></li>
+              <li><span class="kind">Atraso</span><div>compatibilizar parada obrigatória, ponto de carga e prazo de entrega</div></li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="col-title">Abordagem</div>
+            <ul class="res">
+              <li><span class="kind">Modelo</span><div>localização de carregadores com roteamento, no mesmo programa</div></li>
+              <li><span class="kind">Restrição</span><div>jornada de trabalho dos motoristas escrita como restrição, não como nota de rodapé</div></li>
+              <li><span class="kind">Desafio</span><div>equilíbrio entre autonomia elétrica e limite legal de direção</div></li>
+            </ul>
+            <div class="deliver"><b>Sigla</b>
+              PLCR-JTM: Problema de Localização de Carregadores com Roteamento e Jornada de Trabalho dos Motoristas.</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="parcerias">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Indústria, governo e fomento</div>
+        <h2>Com quem o laboratório trabalha</h2>
+        <p>As parcerias definem o recorte dos problemas. Sem dado de operação, o modelo fica no exemplo. Com dado de operação, ele vira decisão.</p>
+      </div>
+      <div class="partners">
+        <div class="partner"><img src="img/cepel.jpg" alt="Logotipo da Eletrobras Cepel."><span>Cepel</span></div>
+        <div class="partner dark"><img src="img/vale.png" alt="Logotipo da Vale."><span>Vale</span></div>
+        <div class="partner"><img src="img/senai.jpeg" alt="Logotipo do Instituto SENAI de Inovação."><span>SENAI</span></div>
+        <div class="partner" style="background:#00a0e4"><img src="img/loggi.jpeg" alt="Logotipo da Loggi."><span style="color:#fff">Loggi</span></div>
+        <div class="partner"><img src="img/bunge.png" alt="Logotipo da Bunge Alimentos."><span>Bunge</span></div>
+        <div class="partner dark"><img src="img/porto.png" alt="Logotipo do Porto do Itaqui."><span>Porto do Itaqui</span></div>
+        <div class="partner"><img src="img/dnit.png" alt="Logotipo do DNIT."><span>DNIT</span></div>
+        <div class="partner"><img src="img/huufma.jpeg" alt="Logotipos do Hospital Universitário da UFMA e da Ebserh."><span>HUUFMA / Ebserh</span></div>
+        <div class="partner"><img src="img/coppe.png" alt="Logotipo da COPPE/UFRJ."><span>COPPE/UFRJ</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="formacao">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Entrar no laboratório</div>
+        <h2>Como a formação começa</h2>
+        <p>Quem chega sem Pesquisa Operacional não é deixado à deriva. Há uma trilha de quatro semanas, em português, com Python e PuLP, feita para a iniciação científica do grupo.</p>
+      </div>
+      <div class="after">
+        <div class="next">
+          <h4>Trilha de entrada em Pesquisa Operacional</h4>
+          <p>Quatro semanas, cerca de oito horas por semana, do problema em português até o modelo no computador. Vídeos obrigatórios, textos opcionais, entrega curta a cada semana.
+            O material está em
+            <a href="https://glaubosclimaco.github.io/onboarding-po/" target="_blank" rel="noopener">glaubosclimaco.github.io/onboarding-po</a>.</p>
+        </div>
+        <div>
+          <h4>Iniciação científica</h4>
+          <p>Depois da trilha, escolhe-se um artigo com o orientador. Esse artigo define o recorte da IC: problema, modelo, método e o que ficou em aberto.</p>
+        </div>
+        <div>
+          <h4>TCC e mestrado</h4>
+          <p>Os trabalhos de conclusão e as dissertações nascem dos projetos do laboratório, com dado real sempre que a parceria permitir.</p>
+        </div>
+        <div>
+          <h4>Escrita</h4>
+          <p>LaTeX, tabelas que se defendem sozinhas e submissão a eventos da área, em especial o SBPO. Escrever faz parte de pesquisar, não é o passo final.</p>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <p><a href="mailto:francisco.glaubos@ufma.br">francisco.glaubos@ufma.br</a>. Coordenação de Ciência da Computação, Campus do Bacanga, São Luís, MA.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Laboratório de Modelagem Matemática e Algoritmos (MODAL). Coordenação de Ciência da Computação, UFMA (São Luís).</p>
+    <p>Página institucional. Conteúdo alinhado à apresentação do laboratório. Trilha de entrada:
+      <a href="https://glaubosclimaco.github.io/onboarding-po/" target="_blank" rel="noopener">onboarding em Pesquisa Operacional</a>.</p>
+    <p class="biblio"><b>Contato</b>
+      Prof. Dr. Francisco Glaubos Nunes Clímaco ·
+      <a href="mailto:francisco.glaubos@ufma.br">francisco.glaubos@ufma.br</a> ·
+      <a href="http://lattes.cnpq.br/1711180190759554" target="_blank" rel="noopener">Lattes</a> ·
+      <a href="https://orcid.org/0000-0002-1357-1318" target="_blank" rel="noopener">ORCID</a>.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var fill = document.getElementById('progFill');
+    var num = document.getElementById('progNum');
+    function render() {
+      var el = document.documentElement;
+      var max = el.scrollHeight - el.clientHeight;
+      var pct = max > 0 ? Math.round((el.scrollTop / max) * 100) : 0;
+      fill.style.width = pct + '%';
+      num.textContent = pct + '%';
+    }
+    window.addEventListener('scroll', render, {passive: true});
+    window.addEventListener('resize', render);
+    render();
+  })();
+</script>
+</body>
+</html>
