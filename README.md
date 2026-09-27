@@ -10,6 +10,7 @@ Trilha de entrada em Pesquisa Operacional: https://glaubosclimaco.github.io/onbo
 
 - `index.html`: a página completa, um arquivo só. É o que o GitHub Pages publica.
 - `img/`: logotipos do laboratório, da UFMA e das parcerias.
+- `figuras/`: desenhos TikZ das linhas de pesquisa (CVaR, branch-and-bound, VRP e filas).
 
 ## Como atualizar
 

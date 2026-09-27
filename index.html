@@ -156,7 +156,12 @@
   .box-h{fill:var(--accent-wash);stroke:var(--accent);stroke-width:1.2}
 
   figure.inlinefig{margin:18px 0 0}
-  figure.inlinefig svg{display:block;width:100%;height:auto;max-width:100%;border:1px solid var(--rule);background:var(--surface)}
+  figure.inlinefig svg,
+  figure.inlinefig img{
+    display:block;width:100%;height:auto;max-width:100%;
+    border:1px solid var(--rule);background:var(--surface);
+  }
+  figure.inlinefig img{padding:10px 12px;box-sizing:border-box}
 
   section{padding-block:58px;border-bottom:1px solid var(--rule)}
   .sec-head{margin-bottom:34px;max-width:62ch}
@@ -622,18 +627,7 @@
             <div class="col">
               <div class="col-title">Exemplo</div>
               <figure class="inlinefig">
-                <svg viewBox="0 0 300 168" role="img" aria-label="Curva de densidade com a cauda direita pintada, representando o CVaR dos piores cinco por cento dos cenários.">
-                  <line class="ax" x1="28" y1="132" x2="284" y2="132"></line>
-                  <line class="ax" x1="28" y1="132" x2="28" y2="18"></line>
-                  <path class="tail" d="M186,132 L186,78 C198,52 214,38 232,48 C248,56 262,78 278,118 L278,132 Z"></path>
-                  <path class="dist" d="M32,128 C48,126 62,118 78,92 C96,54 118,22 148,22 C172,22 186,48 186,78 C198,52 214,38 232,48 C248,56 262,78 278,118"></path>
-                  <line class="iso" x1="186" y1="18" x2="186" y2="132"></line>
-                  <text class="glab-a" x="100" y="148">95% dos cenários</text>
-                  <text class="glab-s" x="232" y="148">cauda 5%</text>
-                  <text class="glab" x="284" y="162" text-anchor="end">retorno</text>
-                  <text class="glab" x="34" y="16">prob.</text>
-                  <text class="glab-s" x="210" y="36">CVaR</text>
-                </svg>
+                <img src="figuras/cvar.png" alt="Comparação entre VaR e CVaR: densidade dos retornos, VaR em 95 por cento na cauda esquerda e CVaR como média dos 5 por cento piores.">
               </figure>
             </div>
           </div>
@@ -658,20 +652,7 @@
             <div class="col">
               <div class="col-title">Exemplo</div>
               <figure class="inlinefig">
-                <svg viewBox="0 0 300 148" role="img" aria-label="Fluxo de três caixas à esquerda, Dados, Mineração e Heurística, apontando para uma caixa Solução à direita.">
-                  <rect class="box" x="22" y="16" width="118" height="28"></rect>
-                  <rect class="box" x="22" y="58" width="118" height="28"></rect>
-                  <rect class="box" x="22" y="100" width="118" height="28"></rect>
-                  <rect class="box-h" x="186" y="48" width="92" height="48"></rect>
-                  <text class="nl" x="81" y="34" text-anchor="middle">dados</text>
-                  <text class="nl" x="81" y="76" text-anchor="middle">mineração</text>
-                  <text class="nl" x="81" y="118" text-anchor="middle">heurística</text>
-                  <text class="glab-s" x="232" y="76" text-anchor="middle">solução</text>
-                  <line class="edge-hot" x1="140" y1="30" x2="140" y2="72"></line>
-                  <line class="edge-hot" x1="140" y1="72" x2="140" y2="114"></line>
-                  <line class="edge-hot" x1="140" y1="72" x2="186" y2="72"></line>
-                  <line class="edge-hot" x1="140" y1="114" x2="186" y2="86"></line>
-                </svg>
+                <img src="figuras/bb-mining.png" alt="Branch-and-bound guiado por um padrão extraído da mineração de dados: o ramo x1 igual a 1 é explorado e os ramos ruins são podados.">
               </figure>
             </div>
           </div>
@@ -696,21 +677,7 @@
             <div class="col">
               <div class="col-title">Exemplo</div>
               <figure class="inlinefig">
-                <svg viewBox="0 0 300 168" role="img" aria-label="Um hub no centro ligado a cinco pontos de demanda, com duas rotas destacadas saindo do hub.">
-                  <line class="edge" x1="150" y1="84" x2="48" y2="36"></line>
-                  <line class="edge" x1="150" y1="84" x2="86" y2="138"></line>
-                  <line class="edge" x1="150" y1="84" x2="250" y2="40"></line>
-                  <line class="edge-hot" x1="150" y1="84" x2="36" y2="92"></line>
-                  <line class="edge-hot" x1="150" y1="84" x2="246" y2="128"></line>
-                  <circle class="opt" cx="150" cy="84" r="14"></circle>
-                  <circle class="vtx" cx="48" cy="36" r="8"></circle>
-                  <circle class="vtx" cx="86" cy="138" r="8"></circle>
-                  <circle class="vtx" cx="250" cy="40" r="8"></circle>
-                  <circle class="vtx" cx="36" cy="92" r="8"></circle>
-                  <circle class="vtx" cx="246" cy="128" r="8"></circle>
-                  <text class="nl-c" x="150" y="88" text-anchor="middle">hub</text>
-                  <text class="glab-s" x="150" y="158" text-anchor="middle">localização de hub e conexões de rota</text>
-                </svg>
+                <img src="figuras/vrp.png" alt="Problema de roteamento de veículos: depósito no centro e duas rotas que visitam seis clientes e voltam ao depósito.">
               </figure>
             </div>
           </div>
@@ -735,19 +702,7 @@
             <div class="col">
               <div class="col-title">Exemplo</div>
               <figure class="inlinefig">
-                <svg viewBox="0 0 300 148" role="img" aria-label="Uma fila na base apontando para três leitos de UTI no topo.">
-                  <rect class="box-h" x="108" y="100" width="84" height="28"></rect>
-                  <text class="nl" x="150" y="118" text-anchor="middle">fila</text>
-                  <rect class="box" x="22" y="18" width="72" height="28"></rect>
-                  <rect class="box" x="114" y="18" width="72" height="28"></rect>
-                  <rect class="box" x="206" y="18" width="72" height="28"></rect>
-                  <text class="nl" x="58" y="36" text-anchor="middle">UTI 1</text>
-                  <text class="nl" x="150" y="36" text-anchor="middle">UTI 2</text>
-                  <text class="nl" x="242" y="36" text-anchor="middle">UTI 3</text>
-                  <line class="edge-hot" x1="150" y1="100" x2="58" y2="46"></line>
-                  <line class="edge-hot" x1="150" y1="100" x2="150" y2="46"></line>
-                  <line class="edge-hot" x1="150" y1="100" x2="242" y2="46"></line>
-                </svg>
+                <img src="figuras/filas.png" alt="Sistema de filas M/M/C: chegadas de pacientes, fila de espera e três leitos, dois ocupados e um ocioso, com saída por alta.">
               </figure>
             </div>
           </div>
