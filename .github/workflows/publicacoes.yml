@@ -1,0 +1,26 @@
+name: Atualizar publicacoes
+
+on:
+  schedule:
+    - cron: "17 11 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Buscar OpenAlex
+        run: python3 scripts/atualizar_publicacoes.py
+      - name: Publicar se houve mudanca
+        run: |
+          if git diff --quiet -- publicacoes.json; then
+            echo "sem mudanca"
+            exit 0
+          fi
+          git add publicacoes.json
+          git -c user.name="laboratorio-modal" -c user.email="github-actions[bot]@users.noreply.github.com" commit -m "Atualizar lista de publicacoes a partir da OpenAlex."
+          git push

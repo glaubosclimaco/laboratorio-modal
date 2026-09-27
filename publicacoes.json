@@ -1,0 +1,148 @@
+{
+  "updated": "2026-09-27",
+  "source": "OpenAlex",
+  "author_id": "A5004734066",
+  "orcid": "0000-0002-1357-1318",
+  "scholar": "https://scholar.google.com.br/citations?user=w1d8zboAAAAJ",
+  "works_count": 19,
+  "cited_by_count": 54,
+  "h_index": 4,
+  "works": [
+    {
+      "title": "New approaches for the traffic counting location problem",
+      "year": 2019,
+      "cites": 20,
+      "venue": "Expert Systems with Applications",
+      "url": "https://doi.org/10.1016/j.eswa.2019.04.068",
+      "authors": [
+        "Pedro Henrique González",
+        "Glaubos Clímaco",
+        "Geraldo Regis Mauri",
+        "Bruno Salezze Vieira",
+        "Glaydston Mattos Ribeiro",
+        "Rômulo Dante Orrico Filho",
+        "Luidi Gelabert Simonetti",
+        "Leonardo Roberto Perim",
+        "Ivone Catarina Simões Hoffmann"
+      ]
+    },
+    {
+      "title": "A Branch-and-Cut and MIP-based heuristics for the Prize-Collecting Travelling Salesman Problem",
+      "year": 2020,
+      "cites": 13,
+      "venue": "RAIRO - Operations Research",
+      "url": "https://doi.org/10.1051/ro/2020002",
+      "authors": [
+        "Glaubos Clímaco",
+        "Luidi Gelabert Simonetti",
+        "Isabel Rosseti"
+      ]
+    },
+    {
+      "title": "Reactive GRASP for the Prize-collecting Covering Tour Problem",
+      "year": 2021,
+      "cites": 5,
+      "venue": "RAIRO - Operations Research",
+      "url": "https://doi.org/10.1051/ro/2021057",
+      "authors": [
+        "Glaubos Clímaco",
+        "Isabel Rosseti",
+        "Rogérioda Silva",
+        "Marcos A. Guerine"
+      ]
+    },
+    {
+      "title": "Combining integer linear programming with a state‐of‐the‐art heuristic for the 2‐path network design problem",
+      "year": 2018,
+      "cites": 5,
+      "venue": "International Transactions in Operational Research",
+      "url": "https://doi.org/10.1111/itor.12563",
+      "authors": [
+        "Glaubos Clímaco",
+        "Isabel Rosseti",
+        "Luidi Gelabert Simonetti",
+        "Marcos A. Guerine"
+      ]
+    },
+    {
+      "title": "Modelagem Matemática para a Alocação de Leitos de UTI com Diferentes Tipos de Leitos e Taxa de Ocupação",
+      "year": 2024,
+      "cites": 3,
+      "venue": "",
+      "url": "https://doi.org/10.5753/sbcas.2024.2168",
+      "authors": [
+        "Carlos Eduardo V. Gomes",
+        "Glaubos Clímaco",
+        "João Augusto Ferreira Nunes de Carvalho",
+        "Darlan B. P. Quintanilha"
+      ]
+    },
+    {
+      "title": "A Web System for Farming Management",
+      "year": 2013,
+      "cites": 3,
+      "venue": "Journal of Economics Business and Management",
+      "url": "https://doi.org/10.7763/joebm.2013.v1.36",
+      "authors": [
+        "Glaubos Clímaco",
+        "F. B. Chagas",
+        "Valéria M. Silva",
+        "Gentil Veloso Barbosa",
+        "Patrick Letouzé"
+      ]
+    },
+    {
+      "title": "A Biased Random-Key Genetic Algorithm for the Traffic Counting Location Problem",
+      "year": 2019,
+      "cites": 2,
+      "venue": "",
+      "url": "https://doi.org/10.1109/bracis.2019.00056",
+      "authors": [
+        "Glaubos Clímaco",
+        "Pedro Henrique González",
+        "Glaydston Mattos Ribeiro",
+        "Geraldo Regis Mauri",
+        "Luidi Gelabert Simonetti"
+      ]
+    },
+    {
+      "title": "Applying the MVC EA-IRPM to reporting-guidelines in medicine: A strategy that is a web system",
+      "year": 2017,
+      "cites": 2,
+      "venue": "",
+      "url": "https://doi.org/10.1109/bhi.2017.7897214",
+      "authors": [
+        "Patrick Letouzé",
+        "J. I. M. de Souza",
+        "Valeria Martins Silva",
+        "Glaubos Clímaco",
+        "F. B. Chagas",
+        "João Y. Ishihara"
+      ]
+    },
+    {
+      "title": "A hybrid heuristic based on GRASP and RVND metaheuristics for the prise-collecting covering tour problem",
+      "year": 2022,
+      "cites": 1,
+      "venue": "International Journal of Logistics Systems and Management",
+      "url": "https://doi.org/10.1504/ijlsm.2022.122977",
+      "authors": [
+        "Glaubos Clímaco",
+        "Isabel Rosseti",
+        "Rogério Da Silva",
+        "Marcos A. Guerine"
+      ]
+    },
+    {
+      "title": "BRKGA-MP-IPR aplicado ao Problema de Localização de Contadores de Tráfego em redes de transporte",
+      "year": 2026,
+      "cites": 0,
+      "venue": "",
+      "url": "https://doi.org/10.5753/semish.2026.23684",
+      "authors": [
+        "Ennio Willian Lima Silva",
+        "Glaubos Clímaco"
+      ]
+    }
+  ]
+}

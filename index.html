@@ -269,6 +269,25 @@
   .people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
   .people h4{font-size:18px;font-weight:600;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
 
+  .pub-meta{
+    display:flex;flex-wrap:wrap;gap:28px 40px;
+    margin:8px 0 6px;padding-top:20px;
+    border-top:2px solid var(--rule-strong);
+  }
+  .pub-meta b{
+    display:block;font-family:var(--mono);font-size:22px;font-weight:500;color:var(--accent);letter-spacing:-.02em;
+  }
+  .pub-meta span{font-size:13px;color:var(--ink-faint)}
+  .pubs{list-style:none;padding:0;margin-top:10px}
+  .pubs li{display:flex;gap:16px;align-items:baseline;padding-block:16px;border-top:1px solid var(--rule-soft)}
+  .pubs li:first-child{border-top:none;padding-top:8px}
+  .pubs .yr{
+    flex:0 0 3.2em;font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.04em;
+  }
+  .pubs a{font-weight:500;font-size:16.5px;line-height:1.35}
+  .pubs .meta{display:block;margin-top:4px;font-size:13.5px;color:var(--ink-faint)}
+  .pubs .cites{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+
   .traps{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:0 38px}
   .trap{padding-block:18px;border-top:1px solid var(--rule)}
   .trap h4{font-family:var(--sans);font-size:15px;font-weight:600;margin-bottom:5px}
@@ -382,6 +401,7 @@
     <nav class="navlinks">
       <a href="#sobre">Sobre</a>
       <a href="#equipe">Equipe</a>
+      <a href="#publicacoes">Publicações</a>
       <a href="#linhas">Linhas</a>
       <a href="#projetos">Projetos</a>
       <a href="#parcerias">Parcerias</a>
@@ -510,7 +530,8 @@
             <li><b>Pós-doutorado</b> UFRJ (2021 a 2025)</li>
             <li><b>Revisor</b> Scientific Reports, RAIRO-OR, Cluster Computing</li>
             <li><b>Lattes</b> <a href="http://lattes.cnpq.br/1711180190759554" target="_blank" rel="noopener">1711180190759554</a>
-              · <b>ORCID</b> <a href="https://orcid.org/0000-0002-1357-1318" target="_blank" rel="noopener">0000-0002-1357-1318</a></li>
+              · <b>ORCID</b> <a href="https://orcid.org/0000-0002-1357-1318" target="_blank" rel="noopener">0000-0002-1357-1318</a>
+              · <b>Scholar</b> <a href="https://scholar.google.com.br/citations?user=w1d8zboAAAAJ" target="_blank" rel="noopener">Glaubos Clímaco</a></li>
             <li><b>E-mail</b> <a href="mailto:francisco.glaubos@ufma.br">francisco.glaubos@ufma.br</a></li>
           </ul>
         </div>
@@ -542,6 +563,25 @@
           <p class="note">A rede de colaboração é o que permite atacar problemas que não cabem em um laboratório só: energia com o CEPEL, logística com a COPPE, saúde com o hospital universitário.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="publicacoes">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Produção</div>
+        <h2>Artigos mais citados</h2>
+        <p>A lista se atualiza sozinha ao abrir a página. As citações vêm da OpenAlex, que indexa os mesmos trabalhos do perfil. A contagem do Google Scholar costuma ser um pouco maior e está no link.</p>
+      </div>
+      <div class="pub-meta" id="pubMeta" hidden></div>
+      <ol class="pubs" id="pubList">
+        <li><span class="yr"></span><div>Carregando a lista viva.</div></li>
+      </ol>
+      <p class="note" id="pubNote">Fonte: OpenAlex, atualizada a cada visita.
+        Perfil:
+        <a href="https://scholar.google.com.br/citations?user=w1d8zboAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        ·
+        <a href="https://orcid.org/0000-0002-1357-1318" target="_blank" rel="noopener">ORCID</a>.</p>
     </div>
   </section>
 
@@ -884,7 +924,8 @@
       Prof. Dr. Francisco Glaubos Nunes Clímaco ·
       <a href="mailto:francisco.glaubos@ufma.br">francisco.glaubos@ufma.br</a> ·
       <a href="http://lattes.cnpq.br/1711180190759554" target="_blank" rel="noopener">Lattes</a> ·
-      <a href="https://orcid.org/0000-0002-1357-1318" target="_blank" rel="noopener">ORCID</a>.</p>
+      <a href="https://orcid.org/0000-0002-1357-1318" target="_blank" rel="noopener">ORCID</a> ·
+      <a href="https://scholar.google.com.br/citations?user=w1d8zboAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
   </div>
 </footer>
 
@@ -981,6 +1022,111 @@
 
     go(0, true);
     play();
+  })();
+
+  (function () {
+    var AUTHOR_ID = 'A5004734066';
+    var MAILTO = 'francisco.glaubos@ufma.br';
+    var TOP_N = 6;
+    var list = document.getElementById('pubList');
+    var meta = document.getElementById('pubMeta');
+    var note = document.getElementById('pubNote');
+    if (!list) return;
+
+    function esc(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/"/g, '&quot;');
+    }
+    function venueOf(work) {
+      var loc = work.primary_location || {};
+      var src = loc.source || {};
+      return src.display_name || work.venue || '';
+    }
+    function authorsOf(work) {
+      if (work.authors && work.authors.length) return work.authors;
+      return (work.authorships || []).map(function (a) {
+        return a.author && a.author.display_name;
+      }).filter(Boolean);
+    }
+    function citeLabel(n) {
+      var k = Number(n) || 0;
+      return k === 1 ? '1 citação' : k + ' citações';
+    }
+    function render(payload, live) {
+      var works = (payload.works || []).slice(0, TOP_N);
+      if (!works.length) throw new Error('lista vazia');
+      meta.hidden = false;
+      meta.innerHTML =
+        '<div><b>' + esc(payload.works_count) + '</b><span>trabalhos</span></div>' +
+        '<div><b>' + esc(payload.cited_by_count) + '</b><span>citações</span></div>' +
+        '<div><b>' + esc(payload.h_index) + '</b><span>índice h</span></div>';
+      list.innerHTML = works.map(function (w) {
+        var year = w.year || w.publication_year || '';
+        var title = w.title || w.display_name || 'sem título';
+        var href = w.url || w.doi || '';
+        var venue = venueOf(w);
+        var cites = w.cites != null ? w.cites : w.cited_by_count;
+        var names = authorsOf(w);
+        var who = names.slice(0, 3).join(', ');
+        if (names.length > 3) who += ' e col.';
+        var head = href
+          ? '<a href="' + esc(href) + '" target="_blank" rel="noopener">' + esc(title) + '</a>'
+          : esc(title);
+        var bits = [];
+        if (who) bits.push(esc(who));
+        if (venue) bits.push(esc(venue));
+        bits.push('<span class="cites">' + esc(citeLabel(cites)) + '</span>');
+        return '<li><span class="yr">' + esc(year) + '</span><div>' + head +
+          '<span class="meta">' + bits.join(' · ') + '</span></div></li>';
+      }).join('');
+      if (note) {
+        note.innerHTML = (live
+          ? 'Fonte: OpenAlex, lida agora ao abrir a página.'
+          : 'Fonte: OpenAlex, reserva local de ' + esc(payload.updated || 'n/d') + '.') +
+          ' Perfil: <a href="https://scholar.google.com.br/citations?user=w1d8zboAAAAJ" target="_blank" rel="noopener">Google Scholar</a> · ' +
+          '<a href="https://orcid.org/0000-0002-1357-1318" target="_blank" rel="noopener">ORCID</a>.';
+      }
+    }
+    function fromCache() {
+      return fetch('publicacoes.json', {cache: 'no-store'}).then(function (r) {
+        if (!r.ok) throw new Error('json');
+        return r.json();
+      }).then(function (j) { render(j, false); });
+    }
+    var worksUrl = 'https://api.openalex.org/works?filter=author.id:' + AUTHOR_ID +
+      '&sort=cited_by_count:desc&per-page=' + TOP_N +
+      '&select=id,doi,display_name,publication_year,cited_by_count,primary_location,authorships' +
+      '&mailto=' + encodeURIComponent(MAILTO);
+    var authorUrl = 'https://api.openalex.org/authors/' + AUTHOR_ID +
+      '?mailto=' + encodeURIComponent(MAILTO);
+    Promise.all([
+      fetch(worksUrl).then(function (r) { if (!r.ok) throw new Error('works'); return r.json(); }),
+      fetch(authorUrl).then(function (r) { if (!r.ok) throw new Error('author'); return r.json(); })
+    ]).then(function (pair) {
+      var works = pair[0].results || [];
+      var author = pair[1];
+      render({
+        works_count: author.works_count,
+        cited_by_count: author.cited_by_count,
+        h_index: (author.summary_stats || {}).h_index,
+        works: works.map(function (w) {
+          return {
+            title: w.display_name,
+            year: w.publication_year,
+            cites: w.cited_by_count,
+            venue: venueOf(w),
+            url: w.doi || '',
+            authorships: w.authorships
+          };
+        })
+      }, true);
+    }).catch(function () {
+      fromCache().catch(function () {
+        list.innerHTML = '<li><span class="yr"></span><div>Não foi possível ler a lista agora. Veja o <a href="https://scholar.google.com.br/citations?user=w1d8zboAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</div></li>';
+      });
+    });
   })();
 </script>
 </body>
