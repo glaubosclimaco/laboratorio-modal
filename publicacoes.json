@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-28",
+  "updated": "2026-10-05",
   "source": "OpenAlex",
   "author_id": "A5004734066",
   "orcid": "0000-0002-1357-1318",
@@ -95,7 +95,7 @@
       "title": "A Biased Random-Key Genetic Algorithm for the Traffic Counting Location Problem",
       "year": 2019,
       "cites": 2,
-      "venue": "",
+      "venue": "Brazilian Conference on Intelligent Systems",
       "url": "https://doi.org/10.1109/bracis.2019.00056",
       "authors": [
         "Glaubos Clímaco",
@@ -109,7 +109,7 @@
       "title": "Applying the MVC EA-IRPM to reporting-guidelines in medicine: A strategy that is a web system",
       "year": 2017,
       "cites": 2,
-      "venue": "",
+      "venue": "IEEE EMBS International Conference on Biomedical & Health Informatics (BHI)",
       "url": "https://doi.org/10.1109/bhi.2017.7897214",
       "authors": [
         "Patrick Letouzé",
