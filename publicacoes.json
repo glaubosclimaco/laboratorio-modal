@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05",
+  "updated": "2026-10-12",
   "source": "OpenAlex",
   "author_id": "A5004734066",
   "orcid": "0000-0002-1357-1318",
@@ -29,7 +29,7 @@
     {
       "title": "A Branch-and-Cut and MIP-based heuristics for the Prize-Collecting Travelling Salesman Problem",
       "year": 2020,
-      "cites": 13,
+      "cites": 12,
       "venue": "RAIRO - Operations Research",
       "url": "https://doi.org/10.1051/ro/2020002",
       "authors": [
@@ -92,6 +92,19 @@
       ]
     },
     {
+      "title": "New Mathematical Modeling to Optimize the Frequency of Bus Routes",
+      "year": 2025,
+      "cites": 2,
+      "venue": "IEEE Access",
+      "url": "https://doi.org/10.1109/access.2025.3552007",
+      "authors": [
+        "Joyce Azevedo Caetano",
+        "Glaubos Clímaco",
+        "Glaydston Mattos Ribeiro",
+        "Laura Bahiense"
+      ]
+    },
+    {
       "title": "A Biased Random-Key Genetic Algorithm for the Traffic Counting Location Problem",
       "year": 2019,
       "cites": 2,
@@ -131,17 +144,6 @@
         "Isabel Rosseti",
         "Rogério Da Silva",
         "Marcos A. Guerine"
-      ]
-    },
-    {
-      "title": "BRKGA-MP-IPR aplicado ao Problema de Localização de Contadores de Tráfego em redes de transporte",
-      "year": 2026,
-      "cites": 0,
-      "venue": "",
-      "url": "https://doi.org/10.5753/semish.2026.23684",
-      "authors": [
-        "Ennio Willian Lima Silva",
-        "Glaubos Clímaco"
       ]
     }
   ]
