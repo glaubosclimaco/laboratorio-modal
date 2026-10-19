@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-12",
+  "updated": "2026-10-19",
   "source": "OpenAlex",
   "author_id": "A5004734066",
   "orcid": "0000-0002-1357-1318",
   "scholar": "https://scholar.google.com.br/citations?user=w1d8zboAAAAJ",
-  "works_count": 19,
-  "cited_by_count": 54,
+  "works_count": 37,
+  "cited_by_count": 56,
   "h_index": 4,
   "works": [
     {
@@ -134,16 +134,17 @@
       ]
     },
     {
-      "title": "A hybrid heuristic based on GRASP and RVND metaheuristics for the prise-collecting covering tour problem",
-      "year": 2022,
+      "title": "Berth Allocation Problem in Export Tidal Bulk Ports with Inventory Control",
+      "year": 2023,
       "cites": 1,
-      "venue": "International Journal of Logistics Systems and Management",
-      "url": "https://doi.org/10.1504/ijlsm.2022.122977",
+      "venue": "Lecture notes of the Institute for Computer Sciences, Social Informatics and Telecommunications Engineering",
+      "url": "https://doi.org/10.1007/978-3-031-30855-0_9",
       "authors": [
+        "Cassio Linhares",
+        "Jorge Alexandre Monteiro de Carvalho Silva",
+        "Marcos Azevedo",
         "Glaubos Clímaco",
-        "Isabel Rosseti",
-        "Rogério Da Silva",
-        "Marcos A. Guerine"
+        "Alexandre Cêsar Muniz de Oliveira"
       ]
     }
   ]
