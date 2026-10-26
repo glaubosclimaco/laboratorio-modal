@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-19",
+  "updated": "2026-10-26",
   "source": "OpenAlex",
   "author_id": "A5004734066",
   "orcid": "0000-0002-1357-1318",
   "scholar": "https://scholar.google.com.br/citations?user=w1d8zboAAAAJ",
   "works_count": 37,
-  "cited_by_count": 56,
+  "cited_by_count": 59,
   "h_index": 4,
   "works": [
     {
@@ -41,7 +41,7 @@
     {
       "title": "Reactive GRASP for the Prize-collecting Covering Tour Problem",
       "year": 2021,
-      "cites": 5,
+      "cites": 6,
       "venue": "RAIRO - Operations Research",
       "url": "https://doi.org/10.1051/ro/2021057",
       "authors": [
@@ -122,7 +122,7 @@
       "title": "Applying the MVC EA-IRPM to reporting-guidelines in medicine: A strategy that is a web system",
       "year": 2017,
       "cites": 2,
-      "venue": "IEEE EMBS International Conference on Biomedical & Health Informatics (BHI)",
+      "venue": "IEEE-EMBS International Conference on Biomedical and Health Informatics (BHI ...)",
       "url": "https://doi.org/10.1109/bhi.2017.7897214",
       "authors": [
         "Patrick Letouzé",
@@ -134,17 +134,16 @@
       ]
     },
     {
-      "title": "Berth Allocation Problem in Export Tidal Bulk Ports with Inventory Control",
-      "year": 2023,
+      "title": "Enhancing a GRASP heuristic for the prize-collecting covering tour problem through data mining techniques",
+      "year": 2026,
       "cites": 1,
-      "venue": "Lecture notes of the Institute for Computer Sciences, Social Informatics and Telecommunications Engineering",
-      "url": "https://doi.org/10.1007/978-3-031-30855-0_9",
+      "venue": "International Journal of Logistics Systems and Management",
+      "url": "https://doi.org/10.1504/ijlsm.2026.150960",
       "authors": [
-        "Cassio Linhares",
-        "Jorge Alexandre Monteiro de Carvalho Silva",
-        "Marcos Azevedo",
         "Glaubos Clímaco",
-        "Alexandre Cêsar Muniz de Oliveira"
+        "Luidi Gelabert Simonetti",
+        "Isabel Rosseti",
+        "Ítalo Santana"
       ]
     }
   ]
