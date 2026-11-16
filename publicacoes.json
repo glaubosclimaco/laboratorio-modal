@@ -1,12 +1,12 @@
 {
-  "updated": "2026-11-09",
+  "updated": "2026-11-16",
   "source": "OpenAlex",
   "author_id": "A5004734066",
   "orcid": "0000-0002-1357-1318",
   "scholar": "https://scholar.google.com.br/citations?user=w1d8zboAAAAJ",
-  "works_count": 37,
-  "cited_by_count": 63,
-  "h_index": 4,
+  "works_count": 38,
+  "cited_by_count": 74,
+  "h_index": 5,
   "works": [
     {
       "title": "New approaches for the traffic counting location problem",
@@ -105,6 +105,19 @@
       ]
     },
     {
+      "title": "New approaches for the prize-collecting covering tour problem",
+      "year": 2023,
+      "cites": 2,
+      "venue": "International Journal of Industrial and Systems Engineering",
+      "url": "https://doi.org/10.1504/ijise.2023.133526",
+      "authors": [
+        "Glaubos Clímaco",
+        "Luidi Gelabert Simonetti",
+        "Isabel Rosseti",
+        "Pedro Henrique González"
+      ]
+    },
+    {
       "title": "A Biased Random-Key Genetic Algorithm for the Traffic Counting Location Problem",
       "year": 2019,
       "cites": 2,
@@ -131,19 +144,6 @@
         "Glaubos Clímaco",
         "F. B. Chagas",
         "João Y. Ishihara"
-      ]
-    },
-    {
-      "title": "Enhancing a GRASP heuristic for the prize-collecting covering tour problem through data mining techniques",
-      "year": 2026,
-      "cites": 1,
-      "venue": "International Journal of Logistics Systems and Management",
-      "url": "https://doi.org/10.1504/ijlsm.2026.150960",
-      "authors": [
-        "Glaubos Clímaco",
-        "Luidi Gelabert Simonetti",
-        "Isabel Rosseti",
-        "Ítalo Santana"
       ]
     }
   ]
