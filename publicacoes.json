@@ -1,17 +1,17 @@
 {
-  "updated": "2026-11-16",
+  "updated": "2026-11-23",
   "source": "OpenAlex",
   "author_id": "A5004734066",
   "orcid": "0000-0002-1357-1318",
   "scholar": "https://scholar.google.com.br/citations?user=w1d8zboAAAAJ",
   "works_count": 38,
-  "cited_by_count": 74,
+  "cited_by_count": 76,
   "h_index": 5,
   "works": [
     {
       "title": "New approaches for the traffic counting location problem",
       "year": 2019,
-      "cites": 21,
+      "cites": 23,
       "venue": "Expert Systems with Applications",
       "url": "https://doi.org/10.1016/j.eswa.2019.04.068",
       "authors": [
@@ -28,14 +28,40 @@
     },
     {
       "title": "A Branch-and-Cut and MIP-based heuristics for the Prize-Collecting Travelling Salesman Problem",
-      "year": 2020,
-      "cites": 14,
+      "year": 2021,
+      "cites": 16,
       "venue": "RAIRO - Operations Research",
       "url": "https://doi.org/10.1051/ro/2020002",
       "authors": [
         "Glaubos Clímaco",
         "Luidi Gelabert Simonetti",
         "Isabel Rosseti"
+      ]
+    },
+    {
+      "title": "New Mathematical Modeling to Optimize the Frequency of Bus Routes",
+      "year": 2025,
+      "cites": 5,
+      "venue": "IEEE Access",
+      "url": "https://doi.org/10.1109/access.2025.3552007",
+      "authors": [
+        "Joyce Azevedo Caetano",
+        "Glaubos Clímaco",
+        "Glaydston Mattos Ribeiro",
+        "Laura Bahiense"
+      ]
+    },
+    {
+      "title": "Modelagem Matemática para a Alocação de Leitos de UTI com Diferentes Tipos de Leitos e Taxa de Ocupação",
+      "year": 2024,
+      "cites": 5,
+      "venue": "",
+      "url": "https://doi.org/10.5753/sbcas.2024.2168",
+      "authors": [
+        "Carlos Eduardo V. Gomes",
+        "Glaubos Clímaco",
+        "João Augusto Ferreira Nunes de Carvalho",
+        "Darlan B. P. Quintanilha"
       ]
     },
     {
@@ -52,16 +78,17 @@
       ]
     },
     {
-      "title": "New Mathematical Modeling to Optimize the Frequency of Bus Routes",
-      "year": 2025,
-      "cites": 4,
-      "venue": "IEEE Access",
-      "url": "https://doi.org/10.1109/access.2025.3552007",
+      "title": "A Web System for Farming Management",
+      "year": 2013,
+      "cites": 5,
+      "venue": "Journal of Economics Business and Management",
+      "url": "https://doi.org/10.7763/joebm.2013.v1.36",
       "authors": [
-        "Joyce Azevedo Caetano",
         "Glaubos Clímaco",
-        "Glaydston Mattos Ribeiro",
-        "Laura Bahiense"
+        "F. B. Chagas",
+        "Valéria M. Silva",
+        "Gentil Veloso Barbosa",
+        "Patrick Letouzé"
       ]
     },
     {
@@ -75,33 +102,6 @@
         "Isabel Rosseti",
         "Luidi Gelabert Simonetti",
         "Marcos A. Guerine"
-      ]
-    },
-    {
-      "title": "Modelagem Matemática para a Alocação de Leitos de UTI com Diferentes Tipos de Leitos e Taxa de Ocupação",
-      "year": 2024,
-      "cites": 3,
-      "venue": "",
-      "url": "https://doi.org/10.5753/sbcas.2024.2168",
-      "authors": [
-        "Carlos Eduardo V. Gomes",
-        "Glaubos Clímaco",
-        "João Augusto Ferreira Nunes de Carvalho",
-        "Darlan B. P. Quintanilha"
-      ]
-    },
-    {
-      "title": "A Web System for Farming Management",
-      "year": 2013,
-      "cites": 3,
-      "venue": "Journal of Economics Business and Management",
-      "url": "https://doi.org/10.7763/joebm.2013.v1.36",
-      "authors": [
-        "Glaubos Clímaco",
-        "F. B. Chagas",
-        "Valéria M. Silva",
-        "Gentil Veloso Barbosa",
-        "Patrick Letouzé"
       ]
     },
     {
